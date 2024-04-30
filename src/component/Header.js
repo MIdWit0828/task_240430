@@ -1,7 +1,7 @@
 function Header() {
     return (
         <header className="header">
-            <h1>헤더입니다</h1>
+            <h1>게임물 관리위원회 게임리스트</h1>
         </header>
     );
 }

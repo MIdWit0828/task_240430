@@ -1,11 +1,21 @@
 const BASE_URL = "https://www.grac.or.kr/WebService/GameSearchSvc.asmx/game";
 
 export async function getGameList() {
-    const url = `${BASE_URL}?&display=${'20'}&pageno=${'1'}`;
+    const url = `${BASE_URL}?display=${'20'}&pageno=${'1'}`;
     const res = await fetch(url);
     const data = await res.text();
     let xmlNode = new DOMParser().parseFromString(data, "text/xml");
-    console.log(xmlToJson(xmlNode));
+    const json = xmlToJson(xmlNode);
+    return json.result.item;
+}
+
+export async function findGameByTitle(gametitle) {
+    const url = `${BASE_URL}?gametitle=${gametitle}&display=${'20'}&pageno=${'1'}`;
+    const res = await fetch(url);
+    const data = await res.text();
+    let xmlNode = new DOMParser().parseFromString(data, "text/xml");
+    const json = xmlToJson(xmlNode);
+    return json.result.item;
 }
 function xmlToJson(xml) {
     // Create the return object
